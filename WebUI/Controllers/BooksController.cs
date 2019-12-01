@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Domain.Abstract;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Domain.Abstract;
 using WebUI.Models;
 
 namespace WebUI.Controllers
@@ -11,7 +11,6 @@ namespace WebUI.Controllers
     public class BooksController : Controller
     {
         private IBookRepository repository;
-
         public int pageSize = 4;
 
         public BooksController(IBookRepository repo)
@@ -19,11 +18,12 @@ namespace WebUI.Controllers
             repository = repo;
         }
 
-        public ViewResult List(int page = 1)
+        public ViewResult List(string genre, int page = 1)
         {
-            BooksListViewModel model = new BooksListViewModel()
+            BooksListViewModel model = new BooksListViewModel
             {
                 Books = repository.Books
+                .Where(b => genre == null || b.Genre == genre)
                 .OrderBy(book => book.BookID)
                 .Skip((page - 1) * pageSize)
                 .Take(pageSize),
@@ -31,8 +31,12 @@ namespace WebUI.Controllers
                 {
                     CurrentPage = page,
                     ItemsPerPage = pageSize,
+                    //TotalItems = genre == null ?
+                    //    repository.Books.Count() :
+                    //    repository.Books.Where(book => book.Genre == genre).Count()
                     TotalItems = repository.Books.Count()
-                }
+                },
+                CurrentGenre = genre
             };
 
             return View(model);
