@@ -24,7 +24,7 @@ namespace WebUI
                 name: null,
                 url: "Page{page}",
                 defaults: new { controller = "Books",  action = "List", genre = (string)null},
-                constraints : new { page = @"\d+" }
+                constraints : new { page = @"\d+"}
             );
 
             routes.MapRoute(
@@ -37,12 +37,12 @@ namespace WebUI
                 null,
                 "{genre}/Page{page}",
                 new { controller = "Books", action = "List" },
-                new { page = @"\d+" }
+                new { page = @"\d+"}
             );
 
             routes.MapRoute(
                 null,
-                "{controller}/{action}/{id}"
+                "{controller}/{action}"
             );
         }
     }

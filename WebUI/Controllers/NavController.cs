@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Domain.Abstract;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,9 +9,23 @@ namespace WebUI.Controllers
 {
     public class NavController : Controller
     {
-        public string Menu()
+        private IBookRepository repository;
+
+        public NavController(IBookRepository repo)
         {
-            return "Something";
+            repository = repo;
+        }
+        
+        public PartialViewResult Menu(string genre = null)
+        {
+            ViewBag.SelectedGenre = genre;
+
+            IEnumerable<string> genres = repository.Books
+                .Select(book => book.Genre)
+                .Distinct()
+                .OrderBy(x => x);
+
+            return PartialView(genres);
         }
     }
 }

@@ -117,81 +117,81 @@ namespace UnitTests
             Assert.IsTrue(result[1].Name == "Book5" && result[1].Genre =="Genre2");
         }
 
-        //[TestMethod]
-        //public void Can_Create_Categories()
-        //{
-        //    // Организация (arrange)
-        //    Mock<IBookRepository> mock = new Mock<IBookRepository>();
-        //    mock.Setup(m => m.Books).Returns(new List<Book>
-        //    {
-        //        new Book{BookID = 1, Name = "Book1", Genre ="Genre1"},
-        //        new Book{BookID = 2, Name = "Book2", Genre ="Genre2"},
-        //        new Book{BookID = 3, Name = "Book3", Genre ="Genre1"},
-        //        new Book{BookID = 4, Name = "Book4", Genre ="Genre3"},
-        //        new Book{BookID = 5, Name = "Book5", Genre ="Genre2"}
-        //    });
+        [TestMethod]
+        public void Can_Create_Categories()
+        {
+            // Организация (arrange)
+            Mock<IBookRepository> mock = new Mock<IBookRepository>();
+            mock.Setup(m => m.Books).Returns(new List<Book>
+            {
+                new Book{BookID = 1, Name = "Book1", Genre ="Genre1"},
+                new Book{BookID = 2, Name = "Book2", Genre ="Genre2"},
+                new Book{BookID = 3, Name = "Book3", Genre ="Genre1"},
+                new Book{BookID = 4, Name = "Book4", Genre ="Genre3"},
+                new Book{BookID = 5, Name = "Book5", Genre ="Genre2"}
+            });
 
-        //    NavController target = new NavController(mock.Object);
+            NavController target = new NavController(mock.Object);
 
-        //    // Действие (act)
-        //    List<string> result = ((IEnumerable<string>)target.Menu().Model).ToList();
+            // Действие (act)
+            List<string> result = ((IEnumerable<string>)target.Menu().Model).ToList();
 
-        //    Assert.AreEqual(result.Count(), 3);
-        //    Assert.AreEqual(result[0], "Genre1");
-        //    Assert.AreEqual(result[1], "Genre2");
-        //    Assert.AreEqual(result[2], "Genre3");
-        //}
+            Assert.AreEqual(result.Count(), 3);
+            Assert.AreEqual(result[0], "Genre1");
+            Assert.AreEqual(result[1], "Genre2");
+            Assert.AreEqual(result[2], "Genre3");
+        }
 
-        //[TestMethod]
-        //public void Indicates_Selected_Genre()
-        //{
-        //    // Организация (arrange)
-        //    Mock<IBookRepository> mock = new Mock<IBookRepository>();
-        //    mock.Setup(m => m.Books).Returns(new List<Book>
-        //    {
-        //        new Book{BookID = 1, Name = "Book1", Genre="Genre1"},
-        //        new Book{BookID = 2, Name = "Book2", Genre="Genre2"},
-        //        new Book{BookID = 3, Name = "Book3", Genre="Genre1"},
-        //        new Book{BookID = 4, Name = "Book4", Genre="Genre3"},
-        //        new Book{BookID = 5, Name = "Book5", Genre="Genre2"}
-        //    });
+        [TestMethod]
+        public void Indicates_Selected_Genre()
+        {
+            // Организация (arrange)
+            Mock<IBookRepository> mock = new Mock<IBookRepository>();
+            mock.Setup(m => m.Books).Returns(new List<Book>
+            {
+                new Book{BookID = 1, Name = "Book1", Genre="Genre1"},
+                new Book{BookID = 2, Name = "Book2", Genre="Genre2"},
+                new Book{BookID = 3, Name = "Book3", Genre="Genre1"},
+                new Book{BookID = 4, Name = "Book4", Genre="Genre3"},
+                new Book{BookID = 5, Name = "Book5", Genre="Genre2"}
+            });
 
-        //    NavController target = new NavController(mock.Object);
+            NavController target = new NavController(mock.Object);
 
-        //    string genreToSelect = "Genre2";
+            string genreToSelect = "Genre2";
 
-        //    // Действие (act)
-        //    string result = target.Menu(genreToSelect).ViewBag.SelectedGenre;
+            // Действие (act)
+            string result = target.Menu(genreToSelect).ViewBag.SelectedGenre;
 
-        //    Assert.AreEqual(genreToSelect, result);
-        //}
+            Assert.AreEqual(genreToSelect, result);
+        }
 
-        //[TestMethod]
-        //public void Generete_Genre_Specific_Book_Count()
-        //{
-        //    // Организация (arrange)
-        //    Mock<IBookRepository> mock = new Mock<IBookRepository>();
-        //    mock.Setup(m => m.Books).Returns(new List<Book>
-        //    {
-        //        new Book{BookID = 1, Name = "Book1", Genre="Genre1"},
-        //        new Book{BookID = 2, Name = "Book2", Genre="Genre2"},
-        //        new Book{BookID = 3, Name = "Book3", Genre="Genre1"},
-        //        new Book{BookID = 4, Name = "Book4", Genre="Genre3"},
-        //        new Book{BookID = 5, Name = "Book5", Genre="Genre2"}
-        //    });
+        [TestMethod]
+        public void Generete_Genre_Specific_Book_Count()
+        {
+            // Организация (arrange)
+            Mock<IBookRepository> mock = new Mock<IBookRepository>();
+            mock.Setup(m => m.Books).Returns(new List<Book>
+            {
+                new Book{BookID = 1, Name = "Book1", Genre="Genre1"},
+                new Book{BookID = 2, Name = "Book2", Genre="Genre2"},
+                new Book{BookID = 3, Name = "Book3", Genre="Genre1"},
+                new Book{BookID = 4, Name = "Book4", Genre="Genre3"},
+                new Book{BookID = 5, Name = "Book5", Genre="Genre2"}
+            });
 
-        //    BooksController controller = new BooksController(mock.Object);
-        //    controller.pageSize = 3;
+            BooksController controller = new BooksController(mock.Object);
+            controller.pageSize = 3;
 
-        //    int res1 = ((BooksListViewModel)controller.List("Genre1").Model).PagingInfo.TotalItems;
-        //    int res2 = ((BooksListViewModel)controller.List("Genre2").Model).PagingInfo.TotalItems;
-        //    int res3 = ((BooksListViewModel)controller.List("Genre3").Model).PagingInfo.TotalItems;
-        //    int resAll = ((BooksListViewModel)controller.List(null).Model).PagingInfo.TotalItems;
+            int res1 = ((BooksListViewModel)controller.List("Genre1").Model).PagingInfo.TotalItems;
+            int res2 = ((BooksListViewModel)controller.List("Genre2").Model).PagingInfo.TotalItems;
+            int res3 = ((BooksListViewModel)controller.List("Genre3").Model).PagingInfo.TotalItems;
+            int resAll = ((BooksListViewModel)controller.List(null).Model).PagingInfo.TotalItems;
 
-        //    Assert.AreEqual(res1, 2);
-        //    Assert.AreEqual(res2, 2);
-        //    Assert.AreEqual(res3, 1);
-        //    Assert.AreEqual(resAll, 5);
-        //}
+            Assert.AreEqual(res1, 2);
+            Assert.AreEqual(res2, 2);
+            Assert.AreEqual(res3, 1);
+            Assert.AreEqual(resAll, 5);
+        }
     }
 }

@@ -31,10 +31,9 @@ namespace WebUI.Controllers
                 {
                     CurrentPage = page,
                     ItemsPerPage = pageSize,
-                    //TotalItems = genre == null ?
-                    //    repository.Books.Count() :
-                    //    repository.Books.Where(book => book.Genre == genre).Count()
-                    TotalItems = repository.Books.Count()
+                    TotalItems = genre == null ?
+                        repository.Books.Count() :
+                        repository.Books.Where(book => book.Genre == genre).Count()
                 },
                 CurrentGenre = genre
             };
