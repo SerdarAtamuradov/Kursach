@@ -15,7 +15,7 @@ namespace WebUI.Controllers
         {
             repository = repo;
         }
-        
+
         public PartialViewResult Menu(string genre = null)
         {
             ViewBag.SelectedGenre = genre;
