@@ -26,6 +26,7 @@ namespace WebUI.Controllers
                 .OrderBy(x => x);
 
             return PartialView(genres);
+            //@Html.Action("Menu", "Nav", new { horizontalNav = true })
         }
     }
 }
